@@ -1,0 +1,8 @@
+venv/
+.idea/
+__pycache__/
+
+.DS_Store
+ymwb_base.db
+ymwb_test_base.db
+ymwb3000_v2.service
