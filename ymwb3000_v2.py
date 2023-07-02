@@ -128,7 +128,7 @@ def is_user_exist(user_id, user_name, user_city, user_tzone):
 
 
 def create_user(user_id, user_name, user_city, user_tzone):
-    """Create new user in db, return succes or nor flag."""
+    """Create new user in db, return success or nor flag."""
     sql_connection = sqlite3.connect(config.database)
     sql_cursor = sql_connection.cursor()
     query = '''INSERT INTO users(id, name, city, zone)
@@ -271,11 +271,9 @@ def get_weather(the_wish, latitude, longitude):
     """Do request for weather, returns complete message for user."""
     response = requests.get(f"https://api.openweathermap.org/data/3.0/onecall?lat={latitude}&lon={longitude}&exclude=minutely,hourly,alerts&appid={config.openweathermap_token}&units=metric&lang=ru")
     weather_data = json.loads(response.text)
-    night_t = round(weather_data["daily"][0]["temp"]["night"])
     morning_t = round(weather_data["daily"][0]["temp"]["morn"])
     day_t = round(weather_data["daily"][0]["temp"]["day"])
     evening_t = round(weather_data["daily"][0]["temp"]["eve"])
-    night_t_fl = round(weather_data["daily"][0]["feels_like"]["night"])
     morning_t_fl = round(weather_data["daily"][0]["feels_like"]["morn"])
     day_t_fl = round(weather_data["daily"][0]["feels_like"]["day"])
     evening_t_fl = round(weather_data["daily"][0]["feels_like"]["eve"])
@@ -283,7 +281,7 @@ def get_weather(the_wish, latitude, longitude):
     wind_gust = round(weather_data["daily"][0]["wind_gust"])
     chance_of_precipitation = int(weather_data["daily"][0]["pop"]) * 100
     condition = weather_data["daily"][0]["weather"][0]["description"]
-    the_message = f"Сегодня <b>{condition.lower()}</b>:\n\U0001F321 Температура [по ощущениям]:\n        \U000000B7 ночью {night_t}\N{DEGREE SIGN}C [{night_t_fl}\N{DEGREE SIGN}C]\n        \U000000B7 утром {morning_t}\N{DEGREE SIGN}C [{morning_t_fl}\N{DEGREE SIGN}C]\n        \U000000B7 днём {day_t}\N{DEGREE SIGN}C [{day_t_fl}\N{DEGREE SIGN}C]\n        \U000000B7 вечером {evening_t}\N{DEGREE SIGN}C [{evening_t_fl}\N{DEGREE SIGN}C]\n\U0001F32C Скорость ветра {wind}м/с, порывы {wind_gust}м/с\n\U0001F327 Вероятность осадков {chance_of_precipitation}%\n\n{the_wish}"
+    the_message = f"Сегодня <b>{condition.lower()}</b>:\n\U0001F321 Температура [по ощущениям]:\n        \U000000B7 утром {morning_t}\N{DEGREE SIGN}C [{morning_t_fl}\N{DEGREE SIGN}C]\n        \U000000B7 днём {day_t}\N{DEGREE SIGN}C [{day_t_fl}\N{DEGREE SIGN}C]\n        \U000000B7 вечером {evening_t}\N{DEGREE SIGN}C [{evening_t_fl}\N{DEGREE SIGN}C]\n\U0001F32C Скорость ветра {wind}м/с, порывы {wind_gust}м/с\n\U0001F327 Вероятность осадков {chance_of_precipitation}%\n\n{the_wish}"
     return the_message
 
 
