@@ -1,3 +1,4 @@
+import logging
 import json
 import time
 import datetime
@@ -11,6 +12,10 @@ import timezonefinder
 import pytz
 import requests
 import config
+
+
+# Logging set up
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(name)s - %(message)s")
 
 
 # Initiating of the bot, start, help and city commands
