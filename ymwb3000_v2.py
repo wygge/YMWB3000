@@ -15,7 +15,12 @@ import config
 
 
 # Logging set up
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(name)s - %(message)s")
+logging.basicConfig(
+    filename='output.log',
+    filemode='a',
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s"
+)
 
 
 # Initiating of the bot, start, help and city commands

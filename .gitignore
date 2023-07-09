@@ -6,3 +6,4 @@ __pycache__/
 ymwb_base.db
 ymwb_test_base.db
 ymwb3000_v2.service
+output.log
